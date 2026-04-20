@@ -1,9 +1,15 @@
-<div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px;">
+<div class="registration-container">
   <h2>NutriGenius Registration</h2>
-  <input type="text" [(ngModel)]="user.name" placeholder="Name" style="display:block; width:100%; margin-bottom:10px;">
-  <input type="email" [(ngModel)]="user.email" placeholder="Email" style="display:block; width:100%; margin-bottom:10px;">
-  <input type="password" [(ngModel)]="user.password" placeholder="Password" style="display:block; width:100%; margin-bottom:10px;">
-  <input type="number" [(ngModel)]="user.weight" placeholder="Weight" style="display:block; width:100%; margin-bottom:10px;">
-  <input type="number" [(ngModel)]="user.height" placeholder="Height" style="display:block; width:100%; margin-bottom:10px;">
-  <button (click)="onRegister()" style="width:100%; padding:10px; background:green; color:white; border:none;">Register Now</button>
+  
+  <input type="text" [(ngModel)]="user.name" name="name" placeholder="Full Name">
+  
+  <input type="email" [(ngModel)]="user.email" name="email" placeholder="Email Address">
+  
+  <input type="password" [(ngModel)]="user.password" name="password" placeholder="Password">
+  
+  <input type="number" [(ngModel)]="user.weight" name="weight" placeholder="Weight (kg)">
+  
+  <input type="number" [(ngModel)]="user.height" name="height" placeholder="Height (cm)">
+  
+  <button (click)="onRegister()">Register Now</button>
 </div>
