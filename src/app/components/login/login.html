@@ -1,0 +1,28 @@
+<div class="login-wrapper">
+  <div class="card shadow-lg p-4" style="width: 400px;">
+    
+    <div class="text-center mb-4">
+      <h1 class="fw-bold mb-1">
+        <span class="text-danger">Nutri</span><span class="text-white">Genius</span>
+      </h1>
+      <p class="text-muted small">Welcome Back, Genius!</p>
+    </div>
+
+    <form (submit)="$event.preventDefault()">
+      <div class="mb-3">
+        <label class="form-label small fw-bold text-white">Email Address</label>
+        <input type="email" [(ngModel)]="loginData.email" name="email" class="form-control" placeholder="example@mail.com">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small fw-bold text-white">Password</label>
+        <input type="password" [(ngModel)]="loginData.password" name="password" class="form-control" placeholder="••••••••">
+      </div>
+
+      <button (click)="onLogin()" class="btn btn-primary btn-lg w-100 mt-3 shadow-sm py-2 fw-bold">
+        Login Now
+      </button>
+    </form>
+    
+    </div>
+</div>
