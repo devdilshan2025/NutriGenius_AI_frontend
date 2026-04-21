@@ -13,13 +13,14 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   // මෙතන weight සහ height වලට 0 වෙනුවට null දැම්මා 
   // එතකොට තමයි HTML එකේ placeholder එක ලස්සනට පේන්නේ
-  user = {
-    name: '',
-    email: '',
-    password: '',
-    weight: null, 
-    height: null
-  };
+user = {
+  name: '',
+  email: '',
+  password: '',
+  age: null, // මේක අනිවාර්යයෙන්ම තියෙන්න ඕනේ
+  weight: null,
+  height: null
+};
 
   constructor(private userService: UserService) {}
 
