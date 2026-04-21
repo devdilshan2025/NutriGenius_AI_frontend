@@ -11,6 +11,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   registerUser(userData: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, userData);
-  }
+  // අපි මෙතනදී Angular එකට කියනවා එන්නේ JSON එකක් නෙවෙයි, Text එකක් කියලා
+  return this.http.post(`${this.baseUrl}/register`, userData, { responseType: 'text' }); 
+}
 }
