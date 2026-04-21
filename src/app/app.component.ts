@@ -1,39 +1,45 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserService } from './service/user.service';
 import { CommonModule } from '@angular/common';
+import { UserService } from './service/user.service';
+import { LoginComponent } from './components/login/login'; // මචං path එක හරියටම තියෙනවද බලන්න
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, LoginComponent], 
   templateUrl: './app.component.html',
   styleUrl: './app.css'
 })
 export class AppComponent {
-  // මෙතන weight සහ height වලට 0 වෙනුවට null දැම්මා 
-  // එතකොට තමයි HTML එකේ placeholder එක ලස්සනට පේන්නේ
-user = {
-  name: '',
-  email: '',
-  password: '',
-  age: null, // මේක අනිවාර්යයෙන්ම තියෙන්න ඕනේ
-  weight: null,
-  height: null
-};
+  // මුලින්ම පේන්න ඕනේ Login එක නිසා 'login' දැම්මා
+  currentPage: 'login' | 'register' = 'login'; 
+
+  user = {
+    name: '',
+    email: '',
+    password: '',
+    age: null,
+    weight: null,
+    height: null
+  };
 
   constructor(private userService: UserService) {}
+
+  // Page එක මාරු කරන්න ලේසි වෙන්න මේක පාවිච්චි කරනවා
+  togglePage(page: 'login' | 'register') {
+    this.currentPage = page;
+  }
 
   onRegister() {
     this.userService.registerUser(this.user).subscribe({
       next: (res) => {
         alert("User Registered Successfully!");
-        console.log(res);
-        // Register වුණාට පස්සේ form එක clear කරන්න ඕනේ නම් මේක පාවිච්චි කරන්න පුළුවන්:
-        // this.user = { name: '', email: '', password: '', weight: null, height: null };
+        // සාර්ථක වුණාම ලොගින් වෙන්න ආයෙත් Login එකට යවනවා
+        this.currentPage = 'login'; 
       },
       error: (err) => {
-        alert("Registration Failed! Check Console.");
+        alert("Registration Failed!");
         console.error(err);
       }
     });
