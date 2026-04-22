@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- Global Styles --- */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  overflow-y: auto !important; /* Scroll කරන්න පුළුවන් වෙන්න */
+}
+
+/* --- Background Image & Overlay --- */
+.bg-image-container {
+  background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?q=80&w=1920&auto=format&fit=crop'); 
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -2;
+}
+
+.bg-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.75); /* Dark overlay */
+  z-index: -1;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+/* --- Card Styles --- */
+.card {
+  background-color: rgba(25, 25, 25, 0.95) !important;
+  border: 1px solid #dc3545 !important;
+  border-radius: 20px !important;
+  color: white !important;
+  backdrop-filter: blur(5px);
+}
+
+/* --- Input Fields (Dark Theme) --- */
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  padding: 10px !important;
+}
+
+/* Placeholder Color */
+::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+  opacity: 1;
+}
+
+/* Button Gradient */
+.btn-primary {
+  background: linear-gradient(45deg, #dc3545, #b0212a) !important;
+  border: none !important;
+}
