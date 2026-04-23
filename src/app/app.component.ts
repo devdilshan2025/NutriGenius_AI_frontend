@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // මේක අනිවාර්යයි
 import { CommonModule } from '@angular/common';
+import { RouterOutlet, RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterOutlet, RouterModule],
   templateUrl: './app.component.html',
-  styleUrl: '../styles.css' // styles.css එකේ මේවා තියෙනවා නම් මෙහෙම දෙන්න
-  // නැත්නම් app.component.css එකක් හදලා ඒකට මේවා දාලා './app.component.css' දෙන්න
+  styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'nutri-genius-frontend';
+  title = 'NutriGenius';
+
+  // Router එක මෙතනට inject කරනවා (public කළේ HTML එකේ පාවිච්චි කරන්න පුළුවන් වෙන්න)
+  constructor(public router: Router) {}
 }
