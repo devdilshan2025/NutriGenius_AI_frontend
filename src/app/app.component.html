@@ -1,6 +1,38 @@
 <div class="bg-image-container"></div>
 <div class="bg-overlay"></div>
 
-<div class="container">
+<nav *ngIf="router.url !== '/login' && router.url !== '/register' && router.url !== '/'" 
+     class="navbar navbar-expand-lg navbar-dark px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold fs-3" routerLink="/dashboard">
+      <span class="text-danger">Nutri</span><span class="text-white">Genius</span>
+    </a>
+    
+    <button class="navbar-toggler border-danger" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item">
+          <a class="nav-link px-3" routerLink="/dashboard" routerLinkActive="active-link">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">Workouts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link px-3" href="#">Diet Plan</a>
+        </li>
+        <li class="nav-item ms-lg-3">
+          <button class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold" routerLink="/login">
+            <i class="bi bi-box-arrow-right me-1"></i> Logout
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="content-area">
   <router-outlet></router-outlet>
 </div>
