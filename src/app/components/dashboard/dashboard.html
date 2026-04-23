@@ -1,1 +1,67 @@
-<p>dashboard works!</p>
+<div class="dashboard-container p-4">
+  <div class="row g-4">
+    
+    <div class="col-lg-4">
+      <div class="card health-card p-4 shadow">
+        <div class="text-center mb-4">
+          <div class="profile-circle mx-auto mb-2">
+            <i class="bi bi-person-circle"></i>
+          </div>
+          <h4 class="text-white fw-bold mb-0">{{userName}}</h4>
+          <span class="badge bg-danger">Pro Member</span>
+        </div>
+
+        <div class="row text-center g-2 mb-4">
+          <div class="col-6">
+            <div class="stat-box p-3 rounded bg-dark border border-secondary">
+              <small class="text-muted d-block">Weight</small>
+              <span class="text-white fw-bold h5">72 <small>kg</small></span>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="stat-box p-3 rounded bg-dark border border-secondary">
+              <small class="text-muted d-block">Height</small>
+              <span class="text-white fw-bold h5">178 <small>cm</small></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bmi-section p-3 rounded text-center">
+          <h6 class="text-white-50">Your BMI Status</h6>
+          <h2 class="text-danger fw-bold mb-1">22.7</h2>
+          <div class="progress mb-2" style="height: 10px; background: #333;">
+            <div class="progress-bar bg-success" style="width: 60%"></div>
+          </div>
+          <span class="text-success small fw-bold">Normal Weight</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+      <div class="card chat-card shadow h-100">
+        <div class="card-header bg-transparent border-danger py-3">
+          <h5 class="text-white mb-0"><i class="bi bi-robot me-2 text-danger"></i>AI Health Genius</h5>
+        </div>
+        
+        <div class="chat-body p-3" #chatScrollContainer>
+          <div *ngFor="let msg of messages" [ngClass]="msg.type === 'ai' ? 'ai-bubble' : 'user-bubble'">
+            <div class="bubble p-3 mb-3">
+              {{msg.text}}
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer bg-transparent border-0 p-3">
+          <div class="input-group">
+            <input type="text" [(ngModel)]="newMessage" class="form-control chat-input" 
+                   placeholder="Ask anything about your health..." (keyup.enter)="sendToAi()">
+            <button class="btn btn-danger px-4" (click)="sendToAi()">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
