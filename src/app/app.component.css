@@ -1,0 +1,42 @@
+/* --- Navbar Styling --- */
+.navbar {
+  backdrop-filter: blur(15px);
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-bottom: 1px solid rgba(220, 53, 69, 0.3);
+  height: 70px;
+  z-index: 1050;
+  position: sticky; /* Navbar එක උඩින්ම තියාගන්න */
+  top: 0;
+}
+
+.navbar-brand {
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.nav-link:hover, .active-link {
+  color: #dc3545 !important;
+}
+
+/* --- Content Area Layout --- */
+
+/* මූලික සැකැස්ම - Navbar එක නැති වෙලාවට (Login/Register) */
+.content-area {
+  min-height: 100vh; /* මුළු Screen එකේම උස ගන්නවා */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Navbar එක පේන වෙලාවට (Dashboard) විතරක් උස Adjust කරන්න */
+/* මෙතනින් Navbar එකට ගිය 70px ප්‍රමාණය අඩු කරනවා */
+nav + .content-area {
+  min-height: calc(100vh - 70px);
+}
