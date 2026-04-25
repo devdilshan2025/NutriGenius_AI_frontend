@@ -1,7 +1,7 @@
 <div class="dashboard-wrapper container-fluid px-5">
   <div class="row h-100 py-4 justify-content-between align-items-start">
     
-    <div class="col-md-3">
+    <div class="col-md-4"> 
       <div class="card shadow-lg p-4 border-glow">
         <div class="text-center mb-4">
           <div class="profile-icon bg-danger text-white mx-auto mb-2 shadow">
@@ -11,23 +11,23 @@
           <p class="text-muted small">Fitness Member</p>
         </div>
 
-        <div class="row g-2 mb-4">
-          <div class="col-4">
-            <div class="stat-box p-2 rounded bg-dark border border-secondary text-center">
-              <small class="text-muted d-block tiny-text">Weight</small>
-              <span class="fw-bold text-white small">{{userWeight}}kg</span>
+        <div class="row g-2 mb-4 justify-content-center">
+          <div class="col-4 text-center">
+            <div class="stat-box shadow-sm">
+              <small class="tiny-text text-muted">Weight</small>
+              <span class="fw-bold text-white">{{userWeight}}kg</span>
             </div>
           </div>
-          <div class="col-4">
-            <div class="stat-box p-2 rounded bg-dark border border-secondary text-center">
-              <small class="text-muted d-block tiny-text">Height</small>
-              <span class="fw-bold text-white small">{{userHeight}}cm</span>
+          <div class="col-4 text-center">
+            <div class="stat-box shadow-sm">
+              <small class="tiny-text text-muted">Height</small>
+              <span class="fw-bold text-white">{{userHeight}}cm</span>
             </div>
           </div>
-          <div class="col-4">
-            <div class="stat-box p-2 rounded bg-dark border border-secondary text-center">
-              <small class="text-muted d-block tiny-text">Age</small>
-              <span class="fw-bold text-white small">{{userAge}}y</span>
+          <div class="col-4 text-center">
+            <div class="stat-box shadow-sm">
+              <small class="tiny-text text-muted">Age</small>
+              <span class="fw-bold text-white">{{userAge}}y</span>
             </div>
           </div>
         </div>
@@ -50,9 +50,22 @@
         </div>
         
         <div class="chat-container mb-3 px-3" #chatScrollContainer>
+          <div *ngIf="messages.length === 0" class="text-center my-5 text-muted">
+            <i class="bi bi-chat-dots fs-1 d-block mb-2 text-danger opacity-50"></i>
+            <p class="fw-bold text-white">Welcome to NutriGenius AI!</p>
+            <small>Ask me anything about your fitness, diet, or health.</small>
+          </div>
+
           <div *ngFor="let msg of messages" [ngClass]="msg.type === 'ai' ? 'ai-msg' : 'user-msg'">
             <div class="message-bubble p-3 rounded mb-3 shadow-sm">
               {{msg.text}}
+            </div>
+          </div>
+
+          <div *ngIf="isLoading" class="ai-msg">
+            <div class="message-bubble p-3 rounded mb-3 shadow-sm d-flex align-items-center">
+              <div class="spinner-grow spinner-grow-sm text-danger me-2" role="status"></div>
+              <span class="small text-white-50 italic">AI is thinking...</span>
             </div>
           </div>
         </div>
@@ -60,7 +73,9 @@
         <div class="input-group shadow-sm">
           <input type="text" [(ngModel)]="newMessage" class="form-control bg-dark text-white border-secondary" 
                  placeholder="Type your fitness query..." (keyup.enter)="sendToAi()">
-          <button class="btn btn-danger px-4 fw-bold" (click)="sendToAi()">Send</button>
+          <button class="btn btn-danger px-4 fw-bold" (click)="sendToAi()" [disabled]="isLoading">
+            {{ isLoading ? '...' : 'Send' }}
+          </button>
         </div>
       </div>
     </div>
