@@ -29,20 +29,19 @@
   border: 1px solid rgba(220, 53, 69, 0.4);
 }
 
-/* --- Stat Boxes (Weight, Height, Age) පෙනුම ස්ථාවර කිරීම --- */
+/* --- Stat Box එකේ සම්පූර්ණ වෙනස --- */
 .stat-box {
   background: rgba(26, 26, 26, 0.9);
   border: 1px solid #333;
   border-radius: 15px;
-  /* Padding එක උඩට සහ යටට විතරක් දීලා පැති වල ඉඩ ඉතිරි කළා */
-  padding: 12px 2px; 
+  padding: 10px 5px; 
   text-align: center;
   
-  min-height: 85px; 
+  min-height: 90px; /* පෙට්ටියේ උස මදක් වැඩි කළා */
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around; /* ටෙක්ස්ට් දෙක අතර පරතරය ලස්සනට බෙදනවා */
   align-items: center;
   transition: transform 0.3s ease;
 }
@@ -52,23 +51,25 @@
   border-color: #dc3545;
 }
 
-/* "Weight", "Height" වගේ කුඩා අකුරු */
+/* උඩින් තියෙන කුඩා අකුරු (Weight, Height, Age) */
 .tiny-text {
-  font-size: 0.6rem; /* තව ටිකක් කුඩා කළා */
+  font-size: 0.65rem; 
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 2px;
-  color: #aaa;
+  color: #888; 
+  margin: 0;
+  line-height: 1;
 }
 
-/* "75kg", "167cm" වගේ ප්‍රධාන අකුරු */
+/* පහළින් තියෙන ප්‍රධාන අගය (75kg, 167cm...) */
 .stat-box span {
-  font-size: 0.9rem; /* පෙට්ටිය ඇතුළේ ලස්සනට පේන්න ගාණට හැදුවා */
+  font-size: 1rem; 
   font-weight: bold;
   color: #fff;
   display: block;
-  white-space: nowrap; /* අකුරු කැඩී යෑම වළක්වනවා */
+  margin-top: 5px;
+  line-height: 1;
 }
 
 /* --- Chat Design --- */
