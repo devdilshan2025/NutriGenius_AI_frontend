@@ -1,12 +1,12 @@
 .dashboard-wrapper {
   color: white;
   height: 100vh;
-  overflow: hidden; /* Screen එක scroll වෙන්නේ නැහැ */
+  overflow: hidden; 
   background-color: transparent;
 }
 
 .card {
-  background-color: rgba(15, 15, 15, 0.98) !important; /* තවත් ටිකක් dark කළා */
+  background-color: rgba(15, 15, 15, 0.98) !important;
   border: 1px solid #333 !important;
   border-radius: 25px !important;
 }
@@ -29,19 +29,64 @@
   border: 1px solid rgba(220, 53, 69, 0.4);
 }
 
+/* --- Stat Boxes (Weight, Height, Age) පෙනුම ස්ථාවර කිරීම --- */
+.stat-box {
+  background: rgba(26, 26, 26, 0.9);
+  border: 1px solid #333;
+  border-radius: 15px;
+  /* Padding එක උඩට සහ යටට විතරක් දීලා පැති වල ඉඩ ඉතිරි කළා */
+  padding: 12px 2px; 
+  text-align: center;
+  
+  min-height: 85px; 
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+  border-color: #dc3545;
+}
+
+/* "Weight", "Height" වගේ කුඩා අකුරු */
+.tiny-text {
+  font-size: 0.6rem; /* තව ටිකක් කුඩා කළා */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  color: #aaa;
+}
+
+/* "75kg", "167cm" වගේ ප්‍රධාන අකුරු */
+.stat-box span {
+  font-size: 0.9rem; /* පෙට්ටිය ඇතුළේ ලස්සනට පේන්න ගාණට හැදුවා */
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  white-space: nowrap; /* අකුරු කැඩී යෑම වළක්වනවා */
+}
+
 /* --- Chat Design --- */
 .chat-container {
-  flex-grow: 1;
+  height: 100%; 
   overflow-y: auto;
   padding: 15px;
   background: rgba(0, 0, 0, 0.45);
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .message-bubble {
   max-width: 80%;
   font-size: 1.05rem;
   line-height: 1.6;
+  word-wrap: break-word;
 }
 
 .ai-msg .message-bubble {
@@ -68,4 +113,40 @@
   border-color: #dc3545 !important;
   box-shadow: none !important;
   color: white !important;
+}
+
+/* Loading & Welcome Styles */
+.italic {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.spinner-grow {
+  animation-duration: 0.8s;
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
+}
+
+.empty-chat-ui {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  opacity: 0.7;
+}
+
+.text-muted small {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  color: #aaa !important;
+}
+
+.ai-msg {
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
