@@ -1,0 +1,32 @@
+<div class="workout-wrapper container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg p-5 border-glow">
+        
+        <div class="d-flex justify-content-between align-items-center border-bottom border-danger pb-3 mb-4">
+          <h3 class="text-white mb-0">
+            <i class="bi bi-lightning-fill text-danger me-2"></i>Personalized Workout Plan
+          </h3>
+          <span class="badge bg-danger">{{userBmiStatus}} Goal</span>
+        </div>
+
+        <div *ngIf="isLoading" class="text-center py-5">
+          <div class="spinner-border text-danger" role="status"></div>
+          <p class="text-white-50 mt-3 italic">Generating your custom fitness routine...</p>
+        </div>
+
+        <div *ngIf="!isLoading" class="plan-content">
+          <div class="ai-response-box p-4 rounded mb-4">
+            <p class="text-white lead mb-0" style="white-space: pre-wrap;">{{workoutPlan}}</p>
+          </div>
+
+          <div class="alert alert-dark border-danger text-white-50 small">
+            <i class="bi bi-info-circle me-2"></i>
+            This plan is generated based on your BMI and current health metrics. Always consult a professional before starting new intense routines.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
