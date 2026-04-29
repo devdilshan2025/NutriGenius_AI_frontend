@@ -1,80 +1,69 @@
-<div class="dashboard-wrapper container-fluid px-5">
-  <div class="row h-100 py-4 justify-content-between align-items-start">
+<div class="dashboard-main">
+  <!-- වම් පැත්ත: Profile සහ Graph -->
+  <div class="side-panel">
     
-    <div class="col-md-4"> 
-      <div class="card shadow-lg p-4 border-glow">
-        <div class="text-center mb-4 pt-3">
-          <h5 class="fw-bold text-white mb-0 text-truncate">{{userName}}</h5>
-          <p class="text-muted small">Fitness Member</p>
-        </div>
+    <!-- Profile & Stats Card -->
+    <div class="card profile-card border-glow">
+      <div class="user-header">
+        <h5 class="fw-bold text-white mb-0">{{userName}}</h5>
+        <p class="text-muted small mb-2">Fitness Member</p>
+      </div>
 
-        <div class="row g-2 mb-4 justify-content-center">
-          <div class="col-4 text-center">
-            <div class="stat-box shadow-sm">
-              <small class="tiny-text text-muted">Weight</small>
-              <span class="fw-bold text-white">{{userWeight}}kg</span>
-            </div>
-          </div>
-          <div class="col-4 text-center">
-            <div class="stat-box shadow-sm">
-              <small class="tiny-text text-muted">Height</small>
-              <span class="fw-bold text-white">{{userHeight}}cm</span>
-            </div>
-          </div>
-          <div class="col-4 text-center">
-            <div class="stat-box shadow-sm">
-              <small class="tiny-text text-muted">Age</small>
-              <span class="fw-bold text-white">{{userAge}}y</span>
-            </div>
-          </div>
-        </div>
+      <div class="stat-grid">
+        <div class="stat-item"><small>Weight</small><span>{{userWeight}}kg</span></div>
+        <div class="stat-item"><small>Height</small><span>{{userHeight}}cm</span></div>
+        <div class="stat-item"><small>Age</small><span>{{userAge}}y</span></div>
+      </div>
 
-        <div class="p-3 rounded bmi-card text-center shadow-sm">
-          <h6 class="text-white-50 mb-1 small">Your BMI</h6>
-          <h2 class="text-danger fw-bold mb-0">{{bmiValue}}</h2>
-          <p class="badge bg-success mt-2 mb-0">{{bmiStatus}}</p>
-        </div>
+      <div class="bmi-status-bar mt-2">
+        <small class="text-white-50">Your BMI: </small>
+        <span class="text-danger fw-bold">{{bmiValue}}</span>
+        <span class="badge bg-success ms-2">{{bmiStatus}}</span>
       </div>
     </div>
 
-    <div class="col-md-8">
-      <div class="card shadow-lg p-4 chat-card border-glow" style="height: 75vh;">
-        <div class="d-flex justify-content-between align-items-center border-bottom border-danger pb-3 mb-3">
-          <h5 class="text-white mb-0">
-            <i class="bi bi-robot me-2 text-danger"></i>AI Health Genius Chat
-          </h5>
-          </div>
-        
-        <div class="chat-container mb-3 px-3" #chatScrollContainer>
-          <div *ngIf="messages.length === 0" class="text-center my-5 text-muted">
-            <i class="bi bi-chat-dots fs-1 d-block mb-2 text-danger opacity-50"></i>
-            <p class="fw-bold text-white">Welcome to NutriGenius AI!</p>
-            <small>Ask me anything about your fitness, diet, or health.</small>
-          </div>
+    <!-- Weight Progress Card -->
+    <div class="card graph-card border-glow">
+      <h6 class="text-center text-white-50 small uppercase mb-2">Weight Progress</h6>
+      <div class="chart-wrapper">
+        <canvas id="weightChart"></canvas>
+      </div>
+    </div>
 
-          <div *ngFor="let msg of messages" [ngClass]="msg.type === 'ai' ? 'ai-msg' : 'user-msg'">
-            <div class="message-bubble p-3 rounded mb-3 shadow-sm">
-              {{msg.text}}
-            </div>
-          </div>
+  </div>
 
-          <div *ngIf="isLoading" class="ai-msg">
-            <div class="message-bubble p-3 rounded mb-3 shadow-sm d-flex align-items-center">
-              <div class="spinner-grow spinner-grow-sm text-danger me-2" role="status"></div>
-              <span class="small text-white-50 italic">AI is thinking...</span>
-            </div>
-          </div>
+  <!-- දකුණු පැත්ත: AI Chat -->
+  <div class="chat-panel">
+    <div class="card chat-card border-glow">
+      <div class="chat-header">
+        <h5 class="text-white mb-0"><i class="bi bi-robot me-2 text-danger"></i>AI Health Genius Chat</h5>
+      </div>
+
+      <div class="chat-body" #chatScrollContainer>
+        <div *ngIf="messages.length === 0" class="empty-chat">
+          <i class="bi bi-chat-dots fs-1 text-danger opacity-50"></i>
+          <p class="text-white fw-bold mt-2">Welcome to NutriGenius!</p>
         </div>
 
-        <div class="input-group shadow-sm">
+        <div *ngFor="let msg of messages" [ngClass]="msg.type === 'ai' ? 'ai-msg' : 'user-msg'">
+          <div class="bubble">{{msg.text}}</div>
+        </div>
+
+        <div *ngIf="isLoading" class="ai-msg">
+          <div class="bubble d-flex align-items-center">
+            <div class="spinner-grow spinner-grow-sm text-danger me-2"></div>
+            <span class="small italic">Thinking...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-footer">
+        <div class="input-group">
           <input type="text" [(ngModel)]="newMessage" class="form-control bg-dark text-white border-secondary" 
-                 placeholder="Type your fitness query..." (keyup.enter)="sendToAi()">
-          <button class="btn btn-danger px-4 fw-bold" (click)="sendToAi()" [disabled]="isLoading">
-            {{ isLoading ? '...' : 'Send' }}
-          </button>
+                 placeholder="Ask anything..." (keyup.enter)="sendToAi()">
+          <button class="btn btn-danger px-4" (click)="sendToAi()" [disabled]="isLoading">Send</button>
         </div>
       </div>
     </div>
-
   </div>
 </div>
