@@ -1,0 +1,22 @@
+.diet-wrapper {
+  min-height: 100vh;
+  background-color: transparent;
+}
+
+.card {
+  background-color: rgba(15, 15, 15, 0.98) !important;
+  border: 1px solid #333 !important;
+  border-radius: 25px !important;
+}
+
+.border-glow {
+  box-shadow: 0 0 20px rgba(40, 167, 69, 0.2); /* Diet එකට කොළ පාටට හුරු Glow එකක් */
+}
+
+.ai-response-box {
+  background: rgba(37, 37, 37, 0.6);
+  border-left: 5px solid #28a745; /* කොළ පාට Border එකක් */
+  line-height: 1.8;
+}
+
+.italic { font-style: italic; }
