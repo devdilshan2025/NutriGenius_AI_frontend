@@ -1,113 +1,144 @@
-.dashboard-wrapper {
-  color: white;
-  height: 100vh;
-  overflow: hidden; 
+/* --- Main Dashboard Layout --- */
+.dashboard-main {
+  display: flex;
+  height: calc(100vh - 80px); /* Navbar එකේ උස අඩු කර ඉතිරි උස ලබා ගනී */
+  gap: 20px;
+  padding: 15px 30px;
   background-color: transparent;
+  overflow: hidden; /* මුළු පේජ් එකම Scroll වීම වළක්වයි */
 }
 
+/* වම් පැත්ත (35% ඉඩ) */
+.side-panel {
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 100%;
+}
+
+/* දකුණු පැත්ත (65% ඉඩ) */
+.chat-panel {
+  flex: 1;
+  height: 100%;
+  display: flex;
+}
+
+/* --- Card පොදු Styles --- */
 .card {
-  background-color: rgba(15, 15, 15, 0.98) !important;
+  background-color: rgba(15, 15, 15, 0.95) !important;
   border: 1px solid #333 !important;
-  border-radius: 25px !important;
-}
-
-.border-glow {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-}
-
-.profile-icon {
-  width: 50px; height: 50px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.4rem;
-}
-
-.uppercase { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
-
-.bmi-card {
-  background: linear-gradient(135deg, rgba(220, 53, 69, 0.15), rgba(0, 0, 0, 0.6));
-  border: 1px solid rgba(220, 53, 69, 0.4);
-}
-
-/* --- Stat Box එකේ සම්පූර්ණ වෙනස --- */
-.stat-box {
-  background: rgba(26, 26, 26, 0.9);
-  border: 1px solid #333;
-  border-radius: 15px;
-  padding: 10px 5px; 
-  text-align: center;
-  
-  min-height: 90px; /* පෙට්ටියේ උස මදක් වැඩි කළා */
-  width: 100%;
+  border-radius: 20px !important;
   display: flex;
   flex-direction: column;
-  justify-content: space-around; /* ටෙක්ස්ට් දෙක අතර පරතරය ලස්සනට බෙදනවා */
-  align-items: center;
-  transition: transform 0.3s ease;
 }
 
-.stat-box:hover {
-  transform: translateY(-5px);
-  border-color: #dc3545;
-}
-
-/* උඩින් තියෙන කුඩා අකුරු (Weight, Height, Age) */
-.tiny-text {
-  font-size: 0.65rem; 
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #888; 
-  margin: 0;
-  line-height: 1;
-}
-
-/* පහළින් තියෙන ප්‍රධාන අගය (75kg, 167cm...) */
-.stat-box span {
-  font-size: 1rem; 
-  font-weight: bold;
-  color: #fff;
-  display: block;
-  margin-top: 5px;
-  line-height: 1;
-}
-
-/* --- Chat Design --- */
-.chat-container {
-  height: 100%; 
-  overflow-y: auto;
+/* --- Profile Card (වම් පැත්තේ උඩ) --- */
+.profile-card {
   padding: 15px;
-  background: rgba(0, 0, 0, 0.45);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
+  flex: 0 0 auto; /* අවශ්‍ය ඉඩ ප්‍රමාණය පමණක් ගනී */
 }
 
-.message-bubble {
-  max-width: 80%;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  word-wrap: break-word;
+/* Stat Grid (Weight, Height, Age) */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.ai-msg .message-bubble {
-  background: #252525;
-  color: #ffffff;
-  border-left: 5px solid #dc3545;
-  margin-right: auto;
-  border-radius: 15px 15px 15px 2px;
+.stat-item {
+  background: rgba(26, 26, 26, 0.9);
+  padding: 10px 5px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #333;
 }
 
-.user-msg .message-bubble {
-  background: #dc3545;
+.stat-item small { 
+  display: block; 
+  color: #888; 
+  font-size: 0.65rem; 
+  text-transform: uppercase; 
+}
+
+.stat-item span { 
+  color: #fff; 
+  font-weight: bold; 
+  font-size: 0.9rem; 
+}
+
+/* BMI Status Bar */
+.bmi-status-bar {
+  background: rgba(220, 53, 69, 0.1);
+  padding: 8px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+/* --- Graph Card (වම් පැත්තේ යට) --- */
+.graph-card {
+  padding: 15px;
+  flex: 1; /* ඉතිරි ඉඩ ප්‍රමාණය සම්පූර්ණයෙන් ලබා ගනී */
+  min-height: 0; /* Flexbox overflow වීම වළක්වයි */
+}
+
+.chart-wrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: 0;
+}
+
+/* --- AI Chat Card (දකුණු පැත්ත) --- */
+.chat-card {
+  flex: 1;
+  height: 100%;
+}
+
+.chat-header {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: auto; /* මැසේජ් වැඩි වුණාම chat එක ඇතුළේ scroll වේ */
+  padding: 15px;
+}
+
+/* Custom Scrollbar (Chat එකට පමණි) */
+.chat-body::-webkit-scrollbar { width: 5px; }
+.chat-body::-webkit-scrollbar-thumb { background: #dc3545; border-radius: 10px; }
+
+/* Message Bubbles */
+.bubble { 
+  padding: 12px 16px; 
+  border-radius: 15px; 
+  max-width: 85%; 
+  margin-bottom: 10px; 
+  font-size: 0.95rem; 
+  line-height: 1.5;
+}
+
+.ai-msg .bubble { 
+  background: #252525; 
   color: white;
-  margin-left: auto;
-  border-radius: 15px 15px 2px 15px;
+  border-left: 4px solid #dc3545; 
+  margin-right: auto; 
 }
 
-/* Custom Red Scrollbar */
-.chat-container::-webkit-scrollbar { width: 5px; }
-.chat-container::-webkit-scrollbar-thumb { background: #dc3545; border-radius: 10px; }
+.user-msg .bubble { 
+  background: #dc3545; 
+  color: white; 
+  margin-left: auto; 
+}
+
+/* Chat Input Section */
+.chat-footer {
+  padding-top: 15px;
+}
 
 .form-control:focus {
   background-color: #111 !important;
@@ -116,36 +147,12 @@
   color: white !important;
 }
 
-/* Loading & Welcome Styles */
-.italic {
-  font-style: italic;
-  opacity: 0.8;
-}
+/* Animations & Effects */
+.border-glow { box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+.uppercase { text-transform: uppercase; letter-spacing: 1px; font-weight: bold; }
+.italic { font-style: italic; opacity: 0.8; }
 
-.spinner-grow {
-  animation-duration: 0.8s;
-  box-shadow: 0 0 10px rgba(220, 53, 69, 0.5);
-}
-
-.empty-chat-ui {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  opacity: 0.7;
-}
-
-.text-muted small {
-  display: block;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-  color: #aaa !important;
-}
-
-.ai-msg {
-  animation: fadeIn 0.4s ease-in;
-}
+.ai-msg { animation: fadeIn 0.4s ease-in; }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
