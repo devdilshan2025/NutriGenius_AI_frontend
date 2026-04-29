@@ -1,1 +1,32 @@
-<p>diet-plan works!</p>
+<div class="diet-wrapper container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card shadow-lg p-5 border-glow">
+        
+        <div class="d-flex justify-content-between align-items-center border-bottom border-danger pb-3 mb-4">
+          <h3 class="text-white mb-0">
+            <i class="bi bi-egg-fried text-danger me-2"></i>Personalized Diet Plan
+          </h3>
+          <span class="badge bg-success">{{userBmiStatus}} Plan</span>
+        </div>
+
+        <div *ngIf="isLoading" class="text-center py-5">
+          <div class="spinner-border text-danger" role="status"></div>
+          <p class="text-white-50 mt-3 italic">Crafting your AI nutrition guide...</p>
+        </div>
+
+        <div *ngIf="!isLoading" class="plan-content">
+          <div class="ai-response-box p-4 rounded mb-4">
+            <p class="text-white lead mb-0" style="white-space: pre-wrap;">{{dietPlan}}</p>
+          </div>
+
+          <div class="alert alert-dark border-success text-white-50 small">
+            <i class="bi bi-heart-pulse-fill me-2 text-danger"></i>
+            This nutrition plan is optimized for your BMI. Remember to stay hydrated throughout the day!
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
