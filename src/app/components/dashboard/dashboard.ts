@@ -1,20 +1,20 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewChecked, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../../service/user.service';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // RouterLink මෙතනින් අයින් කළා
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule], // මෙතනින් RouterLink අයින් කළා (Warning එක නැති වෙයි)
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css'
 })
-export class DashboardComponent implements OnInit, AfterViewChecked {
+export class DashboardComponent implements OnInit, AfterViewChecked, AfterViewInit {
   @ViewChild('chatScrollContainer') private chatContainer!: ElementRef;
 
-  // Variables - මුලින්ම "---" දානවා Layout එක කැත නොවී තියාගන්න
   userName: string = "Loading..."; 
   userWeight: any = "---";
   userHeight: any = "---";
@@ -32,7 +32,6 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
     const email = localStorage.getItem('userEmail'); 
 
     if (email) {
-      // 1. User Details ලබාගැනීම
       this.userService.getUserDetails(email).subscribe({
         next: (data: any) => {
           this.userName = data.name;
@@ -44,7 +43,6 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
         error: (err: any) => console.error("User Details Error:", err)
       });
 
-      // 2. මුල්ම Personalized AI Advice එක ලබාගැනීම
       this.userService.getPersonalizedAdvice(email).subscribe({
         next: (advice: string) => {
           this.messages.push({ type: 'ai', text: advice });
@@ -57,13 +55,53 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
     }
   }
 
+  ngAfterViewInit() {
+    this.renderChart();
+  }
+
+  renderChart() {
+    new Chart('weightChart', {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+          label: 'Weight (kg)',
+          data: [78, 77.2, 76.5, 75], 
+          borderColor: '#dc3545',
+          backgroundColor: 'rgba(220, 53, 69, 0.1)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 5,
+          pointBackgroundColor: '#dc3545'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false, 
+        scales: {
+          y: { 
+            grid: { color: 'rgba(255, 255, 255, 0.1)' }, 
+            ticks: { color: '#aaa' },
+            beginAtZero: false 
+          },
+          x: { 
+            grid: { display: false }, 
+            ticks: { color: '#aaa' } 
+          }
+        },
+        plugins: {
+          legend: { display: false }
+        }
+      }
+    });
+  }
+
   logout() {
     localStorage.removeItem('userEmail');
     this.router.navigate(['/login']);
   }
 
   private calculateBMI() {
-    // අගයන් අංක වලට හරවාගෙන බලනවා (Number conversion)
     const weight = Number(this.userWeight);
     const height = Number(this.userHeight);
 
@@ -84,7 +122,6 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
     const userText = this.newMessage;
     this.messages.push({ type: 'user', text: userText });
     this.newMessage = ""; 
-    
     this.isLoading = true; 
 
     this.userService.getAiChat(userText).subscribe({
